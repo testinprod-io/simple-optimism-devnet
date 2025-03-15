@@ -1,0 +1,9 @@
+# jetbrains
+.idea
+
+# environment
+.env
+envs/devnet/config/genesis/
+
+# celestia
+/shared
