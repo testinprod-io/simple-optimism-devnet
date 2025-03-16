@@ -12,7 +12,7 @@ default:
 
 # Bring up the devnet
 devnet-up:
-    sh scripts/devnet/devnet-up.sh
+    bash scripts/devnet/devnet-up.sh
 
 # Shut down all services
 devnet-down:

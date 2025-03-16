@@ -41,7 +41,7 @@ AMOUNT="1000000000000000utia"
 echo "Fetching node address from bridge..."
 NODE_ADDRESS=$(curl -s -X POST -H "Content-Type: application/json" \
   --data '{"id":1,"jsonrpc":"2.0","method":"state.AccountAddress","params":[]}' \
-  http://host.docker.internal:26658 | jq -r '.result')
+  http://celestia-bridge:26658 | jq -r '.result')
 echo "Node address: $NODE_ADDRESS"
 
 if [ -z "$NODE_ADDRESS" ] || [ "$NODE_ADDRESS" = "null" ]; then

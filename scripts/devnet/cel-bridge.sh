@@ -1,5 +1,7 @@
 #!/bin/sh
 
+PRIVATE_IP=$(ip -4 addr show ens5 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
 # Wait for Celestia App to be ready
 while ! curl -s http://celestia-app:26657/status > /dev/null; do
   echo 'Waiting for Celestia App...'
@@ -27,7 +29,7 @@ echo "Genesis hash: $CELESTIA_CUSTOM"
 
 # Initialize and start bridge
 celestia bridge init \
-  --core.ip host.docker.internal \
+  --core.ip $PRIVATE_IP \
   --p2p.network test \
   --rpc.skip-auth \
   --rpc.addr 0.0.0.0 \
@@ -36,7 +38,7 @@ celestia bridge init \
   --rpc.port 26658
 
 celestia bridge start \
-  --core.ip host.docker.internal \
+  --core.ip $PRIVATE_IP \
   --p2p.network test \
   --rpc.skip-auth \
   --rpc.addr 0.0.0.0 \

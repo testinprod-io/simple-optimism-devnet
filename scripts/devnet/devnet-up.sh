@@ -22,6 +22,7 @@ ROLLUP_CONFIG_PATH="${GENESIS_PATH}/rollup.json"
 SCRIPTS_DIR="${ROOT_DIR}/scripts/devnet"
 SCRIPTS_DIR="${ROOT_DIR}/scripts/devnet"
 DEVNET_COMPOSE_FILE="docker-compose.yml"
+PRIVATE_IP=$(hostname -I | awk '{print $1}')
 
 # Retry settings for L1 RPC
 MAX_RETRIES=30
@@ -90,7 +91,7 @@ else
     echo "📜 Running L2 Genesis Script..."
     cd "$SCRIPTS_DIR"
     go run genesis/main.go genesis l2 \
-        --l1-rpc "http://localhost:8545" \
+        --l1-rpc "http://${PRIVATE_IP}:8545" \
         --deploy-config "$DEVNET_CONFIG_PATH" \
         --l2-allocs "$L2_ALLOCS_PATH" \
         --l1-deployments "$ADDRESSES_JSON_PATH" \
